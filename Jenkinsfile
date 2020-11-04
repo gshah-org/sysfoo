@@ -5,6 +5,8 @@ pipeline {
       agent {
         docker {
           image 'maven:3.6.3-jdk-11-slim'
+          args '''-v $HOME/.m2:/root/.m2
+'''
         }
 
       }
@@ -17,6 +19,8 @@ pipeline {
       agent {
         docker {
           image 'maven:3.6.3-jdk-11-slim'
+          args '''-v $HOME/.m2:/root/.m2
+'''
         }
 
       }
@@ -26,13 +30,16 @@ pipeline {
     }
 
     stage('package') {
-      when { branch "master" }
-
       agent {
         docker {
           image 'maven:3.6.3-jdk-11-slim'
+          args '''-v $HOME/.m2:/root/.m2
+'''
         }
 
+      }
+      when {
+        branch 'master'
       }
       steps {
         sh 'mvn package -DskipTests'
@@ -42,7 +49,9 @@ pipeline {
 
     stage('Docker BnP') {
       agent any
-      when { branch "master" }
+      when {
+        branch 'master'
+      }
       steps {
         script {
           docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
