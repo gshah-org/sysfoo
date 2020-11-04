@@ -5,7 +5,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.6.3-jdk-11-slim'
-          args '''-v $HOME/.m2:/root/.m2
+          args '''-v data:/root/.m2
 '''
         }
 
@@ -19,7 +19,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.6.3-jdk-11-slim'
-          args '''-v $HOME/.m2:/root/.m2
+          args '''-v data:/root/.m2
 '''
         }
 
@@ -33,7 +33,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.6.3-jdk-11-slim'
-          args '''-v $HOME/.m2:/root/.m2
+          args '''-v data:/root/.m2
 '''
         }
 
